@@ -1,4 +1,3 @@
- 
 const dbConnection = require("./sqlite");
 
 dbConnection
@@ -18,23 +17,11 @@ function init(db) {
 }
 
 const knex_db = require("./db-config");
+
 const dbinitialize = async () => {
     testBase.resetDatabase(knex_db);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//readTeachers
 const readTeachers = async () => {
     const sql = `SELECT * FROM teacher`
     return new Promise((resolve, reject) => {
@@ -48,7 +35,7 @@ const readTeachers = async () => {
             });
     });
 }
-//readTeacherInfo
+
 const readTeacherInfo = async (id) => {
     const sql = `SELECT * FROM teacher WHERE id = ?`
     return new Promise((resolve, reject) => {
@@ -62,7 +49,7 @@ const readTeacherInfo = async (id) => {
             });
     });
 }
-//addTeacher
+
 const addTeacher = async (id, name, age) => {
     const sql = `INSERT INTO teacher(id,name,age) values (?, ?, ?)`
     return new Promise((resolve, reject) => {
@@ -76,7 +63,7 @@ const addTeacher = async (id, name, age) => {
             });
     });
 }
-//updateTeacher
+
 const updateTeacher = async (name, age, id) => {
     const sql = `UPDATE teacher SET name=?, age=? WHERE id=?`
     return new Promise((resolve, reject) => {
@@ -91,31 +78,6 @@ const updateTeacher = async (name, age, id) => {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//deleteTeacher
 const deleteTeacher = async (id) => {
     const sql = `DELETE FROM teacher WHERE id = ?`
     return new Promise((resolve, reject) => {
@@ -130,13 +92,6 @@ const deleteTeacher = async (id) => {
     });
 }
 
-
-//==================================================================
-
-
-//Student
-
-//readStudents
 const readStudents = async () => {
     const sql = `SELECT * FROM student`
     return new Promise((resolve, reject) => {
@@ -151,21 +106,11 @@ const readStudents = async () => {
     });
 }
 
-
-
-
-
-
-
-
-
-
-//readStudentInfo 
 const readStudentInfo = async (id) => {
     const sql = `SELECT * FROM student WHERE id = ?`
     return new Promise((resolve, reject) => {
         knex_db
-            .raw(sql,[id])
+            .raw(sql, [id])
             .then((student) => {
                 resolve(student);
             })
@@ -174,20 +119,12 @@ const readStudentInfo = async (id) => {
             });
     });
 }
- 
 
-
-
-
-
-
-
-// addStudent
-const addStudent = async (id, name, age, religion) => {
-    const sql = `INSERT INTO student(id,name,age,religion) values (?, ?, ?,?)`
+const addStudent = async (id, name, age, hometown) => {
+    const sql = `INSERT INTO student(id,name,age,hometown) values (?, ?, ?, ?)`
     return new Promise((resolve, reject) => {
         knex_db
-            .raw(sql,[[id, name, age,religion]])
+            .raw(sql, [id, name, age, hometown])
             .then(() => {
                 resolve({status: "Successfully inserted Student"});
             })
@@ -196,21 +133,12 @@ const addStudent = async (id, name, age, religion) => {
             });
     });
 }
- 
 
-
-
-
-
-
-
-
-//updateStudent
-const updateStudent = async (name, age, religion, id) => {
-    const sql = `UPDATE student SET name=?, age=?  religion=? WHERE id=?`
+const updateStudent = async (name, age, hometown, id) => {
+    const sql = `UPDATE student SET name=?, age=?, hometown=? WHERE id=?`
     return new Promise((resolve, reject) => {
         knex_db
-            .raw(sql,[name, age, religion, id])
+            .raw(sql, [name, age, hometown, id])
             .then(() => {
                 resolve({status: "Successfully updated Student"});
             })
@@ -219,29 +147,12 @@ const updateStudent = async (name, age, religion, id) => {
             });
     });
 } 
- 
- 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//deleteStudent
 const deleteStudent = async (id) => {
     const sql = `DELETE FROM student WHERE id = ?`
     return new Promise((resolve, reject) => {
         knex_db
-            .raw(sql,[id])
+            .raw(sql, [id])
             .then(() => {
                 resolve({status: "Successfully deleted Student"});
             })
@@ -250,15 +161,6 @@ const deleteStudent = async (id) => {
             });
     });
 }
-
-
- 
-
-
-
-
-
-
 
 module.exports = {
     readTeachers,
@@ -270,6 +172,5 @@ module.exports = {
     readStudentInfo,
     readTeacherInfo,
     updateStudent,
-    updateTeacher,
-    dbinitialize
+    updateTeacher
 };

@@ -21,9 +21,9 @@ export class AppServiceService {
     return this.http.get(`/${this.ROOT_URL}/dbinitialize`)
   }
 
-  getTeacherData() {
-    return this.http.get(`/${this.ROOT_URL}/api/listTeachers`)
-}
+  getTeacherData(){
+    return this.http.get(`/${this.ROOT_URL}/listTeachers`)
+  }
 
   getStudentData(){
     return this.http.get(`/${this.ROOT_URL}/listStudents`)
