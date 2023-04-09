@@ -1,34 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppServiceService } from 'src/app/app-service.service';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-add-new-student',
-  templateUrl: './add-new-student.component.html',
-  styleUrls: ['./add-new-student.component.css']
-})
-export class AddNewStudentComponent implements OnInit {
+import { AddNewStudentComponent } from './add-new-student.component';
 
-  constructor(private service : AppServiceService, private router: Router) { }
+describe('AddNewStudentComponent', () => {
+  let component: AddNewStudentComponent;
+  let fixture: ComponentFixture<AddNewStudentComponent>;
 
-  ngOnInit(): void {
-  }
-
-  createStudent(value){
-
-    const student = {
-      id : value.id,
-      name : value.name,
-      age : value.age,
-      hometown : value.Hometown
-    }
-
-
-    this.service.addStudent(student).subscribe((response)=>{
-      this.router.navigate(['student'])
-    },(error)=>{
-      console.log('ERROR - ', error)
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ AddNewStudentComponent ]
     })
-  }
+    .compileComponents();
+  }));
 
-}
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AddNewStudentComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
